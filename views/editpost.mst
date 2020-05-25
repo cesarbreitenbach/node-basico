@@ -1,0 +1,26 @@
+{{>header}}
+<h1 class="titulo">Edit Post</h1>
+
+<form method='POST' enctype="multipart/form-data">
+<label>
+    Imagem:
+    <input type="file" name="photo" width="200" />
+    {{#post.photo}}
+        <img class="imgEdit" src="/uploads/{{post.photo}}" />
+    {{/post.photo}}
+</label>
+<br>
+<label>
+Titulo:<input type="text" name="title" value="{{post.title}}" />
+</label>
+<br>
+<label>
+Mensagem:<textarea name="corpo">{{post.corpo}} </textarea>
+</label>
+<br>
+<label>
+    Tags: <small>(separe por virgula)</small>
+    <input type="text" name="tags" value="{{post.tags}}"/>
+</label>
+<input type="submit" value="enviar"/>
+</form>

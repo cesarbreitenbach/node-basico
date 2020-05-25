@@ -1,0 +1,24 @@
+{{>header}}
+
+<div class="tags">
+    {{#tags}}
+        {{#_id}}
+            <div class="tag {{class}}"><a href="?t={{_id}}">{{_id}} ({{count}}) </a></div>
+        {{/_id}}    
+    {{/tags}}
+</div>
+
+{{#posts}}
+<div class="post">
+    {{#photo}}
+        <img src="/uploads/{{photo}}" />
+    {{/photo}}
+    <h3><a href="/post/{{slug}}">{{title}}</a></h3>
+    <p>{{corpo}}</p>
+    {{#user}}
+    <a href="/post/{{slug}}/edit">[ edit ]</a>
+    {{/user}}
+</div>
+{{/posts}}
+
+

@@ -1,0 +1,9 @@
+{{>header}}
+<div class="parentPost2">
+    <div class="post2">
+        <h1>{{post.title}}</h1>
+        <article>{{post.corpo}}</article>
+        <hr>
+        <small>Tags: {{post.tags}}</small>
+    </div>
+<div>

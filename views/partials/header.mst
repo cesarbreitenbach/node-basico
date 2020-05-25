@@ -1,0 +1,37 @@
+<header>
+    {{#pageTitle}}
+        <title>{{ pageTitle }}</title>
+    {{/pageTitle}}
+    {{^pageTitle}}
+        <title>{{ h.defaultPageTitle }}</title>
+    {{/pageTitle}}
+    <link rel="stylesheet" href="/assets/css/template.css">
+    {{>menu}}
+
+    {{#user}}
+        <div class='logout' >
+            <p>Bem vindo, {{ user.name }}</p>
+        </div>
+    {{/user}}
+
+</header>
+
+
+    
+{{#flashes}}
+    {{#success}}
+    <div class="warning">
+        <strong> {{.}} </strong>
+    </div>
+    {{/success}}
+    {{#error}}
+    <div class="warning">
+        <strong> {{.}} </strong>
+    </div>
+    {{/error}}
+{{#info}}
+    <div class="warning">
+        <strong> {{.}} </strong>
+    </div>
+{{/info}}
+{{/flashes}}
