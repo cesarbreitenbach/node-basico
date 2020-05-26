@@ -11,13 +11,12 @@ exports.index= async (req, res)=>{
         class:''
     }
 
-
+    
     responseJson.tag = req.query.t;
-    console.log(req.user)
 
     const findFilters = (responseJson.tag === undefined ? { } : {tags:responseJson.tag} )
 
-    const postsPromisse =  Post.find(findFilters);
+    const postsPromisse =  Post.getPosts(findFilters);
 
     const tagsPromisse =  Post.getTagsList();
 
@@ -33,6 +32,7 @@ exports.index= async (req, res)=>{
         }
     }
 
+    console.log(posts[0])
     
 
     res.render('home', responseJson) 
