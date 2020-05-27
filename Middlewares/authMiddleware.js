@@ -9,3 +9,18 @@ exports.isLogged = (req, res, next) => {
     //está autenticado, vai pra proxima função..
     next()
 }
+
+exports.changePass = (req, res) => {
+
+    if(req.body.password != req.body['password-confirm']){
+        req.flash('error', 'Senhas não conferem!')
+        return res.redirect('/users/profile')
+    }
+
+    req.user.setPassword(req.body.password, async ()=>{
+        await req.user.save()
+        req.flash('success', 'Senha alterada com sucesso!')
+        res.redirect('/')
+    })
+
+}

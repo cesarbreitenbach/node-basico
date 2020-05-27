@@ -38,4 +38,6 @@ router.get('/users/logout', UserController.logout)
 router.get('/users/profile', AuthMiddleware.isLogged, UserController.profile)
 router.post('/users/profile', AuthMiddleware.isLogged, UserController.profileAction)
 
+router.post('/users/change-password', AuthMiddleware.isLogged, AuthMiddleware.changePass)
+
 module.exports = router; 

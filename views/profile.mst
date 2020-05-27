@@ -14,3 +14,18 @@
     <br>
     <button>Salvar</button>
 </form>
+<hr>
+<form method='POST' action='/users/change-password'>
+    <br>
+    <label>
+        Nova Senha: 
+        <input type='Password' name='password' />
+    </label>
+    <br>
+    <label>
+        Confirmar Nova Senha: 
+        <input type='Password' name='password-confirm' />
+    </label>
+    <br>
+    <button>Trocar</button>
+</form>
