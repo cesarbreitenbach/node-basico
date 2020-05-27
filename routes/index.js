@@ -7,6 +7,8 @@ const AuthMiddleware = require('../Middlewares/authMiddleware')
 
 const router = express.Router();
 
+
+
 router.get('/',  HomeController.index) 
 router.get('/users/login', UserController.login)
 router.post('/users/login', UserController.loginAction)
@@ -32,5 +34,8 @@ router.post('/post/:slug/edit',
 router.get('/post/:slug', PostController.view)
 
 router.get('/users/logout', UserController.logout)
+
+router.get('/users/profile', AuthMiddleware.isLogged, UserController.profile)
+router.post('/users/profile', AuthMiddleware.isLogged, UserController.profileAction)
 
 module.exports = router; 

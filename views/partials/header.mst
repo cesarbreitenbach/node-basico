@@ -10,7 +10,7 @@
 
     {{#user}}
         <div class='logout' >
-            <p>Bem vindo, {{ user.name }}</p>
+            <p>Bem vindo, <a href="/users/profile">{{ user.name }}</a></p>
         </div>
     {{/user}}
 

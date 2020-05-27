@@ -26,6 +26,7 @@ exports.addAction = async (req, res) => {
 
     req.flash('success', 'Post salvo com sucesso! ')
     res.redirect("/")
+   
 }
 
 exports.edit = async (req, res) => {
