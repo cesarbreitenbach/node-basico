@@ -7,7 +7,9 @@ mongoose.Promise = global.Promise
 //Criar o schema no mongoose para o usuario. Ele está basicamente criando a estrutura do documento USER que vai ser gavado no MongoDB
 const userSchema = new mongoose.Schema({
     name:String,
-    email:String
+    email:String,
+    changePassToken:String,
+    changePassExpires:Date
 })
 
 

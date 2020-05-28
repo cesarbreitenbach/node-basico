@@ -1,0 +1,16 @@
+{{>header}}
+<h1>Trocar a senha</h1>
+<form method='POST' >
+    <br>
+    <label>
+        Nova Senha: 
+        <input type='Password' name='password' />
+    </label>
+    <br>
+    <label>
+        Confirmar Nova Senha: 
+        <input type='Password' name='password-confirm' />
+    </label>
+    <br>
+    <button>Trocar</button>
+</form>

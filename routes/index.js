@@ -40,4 +40,10 @@ router.post('/users/profile', AuthMiddleware.isLogged, UserController.profileAct
 
 router.post('/users/change-password', AuthMiddleware.isLogged, AuthMiddleware.changePass)
 
+router.get('/users/forget', UserController.forget)
+router.post('/users/forget', UserController.forgetAction)
+
+router.get('/user/reset/:token', UserController.forgetToken)
+router.post('/user/reset/:token', UserController.forgetTokenAction)
+
 module.exports = router; 

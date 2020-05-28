@@ -14,7 +14,7 @@ exports.changePass = (req, res) => {
 
     if(req.body.password != req.body['password-confirm']){
         req.flash('error', 'Senhas não conferem!')
-        return res.redirect('/users/profile')
+        return res.redirect('back')
     }
 
     req.user.setPassword(req.body.password, async ()=>{
