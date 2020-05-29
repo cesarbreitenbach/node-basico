@@ -104,11 +104,10 @@ exports.forgetAction = async (req, res) => {
 
     mailHandler.send({
         to:user.email,
-        subject:'Alterar senha',
+        subject:"Redefinição de senha",
         html,
-        text,
-
-    })
+        text
+    });
 
 
     req.flash('success', `Link enviado para o email`)

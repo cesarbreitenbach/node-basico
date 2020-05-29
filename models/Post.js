@@ -1,6 +1,7 @@
 const mongoose = require('mongoose')
 mongoose.Promise = global.Promise
 const slug = require('slug')
+const crypto = require('crypto')
 
 
 const PostSchema = new mongoose.Schema({
@@ -24,13 +25,14 @@ PostSchema.pre('save', async function (next) {
     if (this.isModified('title')) {
         this.slug = slug(this.title, { lower: true })
 
-        const slugRegex = new RegExp(`^(${this.slug})((-[0,9]{1,}$)?)$`, 'i');
+        const slugRegex = new RegExp(`^(${this.slug})((-[A,z0,9]{1,}$)?)$`, 'i');
 
         const postsWithSlug = await this.constructor.find({ slug: slugRegex })
 
+        //Caso já exista um slug no banco ele cria o proximo com um hash de 6 digitos
         if (postsWithSlug.length > 0) {
-            let tamanho = postsWithSlug.length;
-            this.slug = `${this.slug}-${tamanho + 1}`
+            let hash = crypto.randomBytes(6).toString('hex');
+            this.slug = `${this.slug}-${hash}`
         }
 
     }
