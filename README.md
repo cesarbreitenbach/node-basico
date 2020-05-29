@@ -3,8 +3,7 @@ Exercicios e desenvolvimento realizados no curso de node B7web
 
 Esse é um projeto simples de um site feito em NodeJs, onde o usuario cria uma conta e insere posts com imagem e tags.
 
-Funcionalidades basicas:
-
+Descrição da implementação:
 - Uso da biblioteca express e dependencias para controle das rotas e servidor
 - Uso de mensagens flash() biblioteca express-flash
 - Controle de cadastro e login de usuarios com biblioteca passport
@@ -13,9 +12,9 @@ Funcionalidades basicas:
 - Uso de middlewares para controle de authenticação e controle de rotas, middleware para tratar upload de arquivos
 - Usuario pode postar e editar posts
 - Controle de menu conforme status do visitante
-- Recuperar senha, envio de email utilizanod node
+- uso da biblioteca crypto para gerar tags e controlar links de trocar senha
+- Recuperar senha, envio de email utilizando nodemailer
 
-- entre outros que serão adicionados a essa descrição... (25/05/2020)
 
 Requerimentos:
 - É necessário que seja instalado o MongoDB e biblioteca mongoose

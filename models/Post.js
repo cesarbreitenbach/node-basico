@@ -3,6 +3,8 @@ mongoose.Promise = global.Promise
 const slug = require('slug')
 const crypto = require('crypto')
 
+const objectId = mongoose.SchemaTypes.ObjectId;
+
 
 const PostSchema = new mongoose.Schema({
     title: {
@@ -17,7 +19,10 @@ const PostSchema = new mongoose.Schema({
     slug: String,
     tags: [String],
     photo: String,
-    author: mongoose.SchemaTypes.ObjectId
+    author: {
+        type:objectId,
+        ref:'User'
+    }
 })
 
 PostSchema.pre('save', async function (next) {
@@ -57,30 +62,31 @@ PostSchema.statics.getTagsList = function () {
 }
 
 PostSchema.statics.getPosts = function (filters = {}) {
-
-    return this.aggregate([
-        { $match: filters },
-        {
-            $lookup:
-            {
-                //join em users
-                from: 'users',
-                //cria variavel author baseada no campo author da estrutura
-                let:{'author':'$author'}, 
-                //seria o where basicamente.. bater a expreção author equals _id
-                pipeline:[
-                    { $match:{ $expr:{ $eq:['$$author','$_id']}}},
-                    { $limit:1 }
-                ],
-                as: 'author'
-            },
-        },
-        {
-            $addFields:{
-                'author':{ $arrayElemAt:[  '$author.name' , 0 ]}
-            }
-        }
-    ])
+    //adicionando referencia ao objeto author no model, esse comando substitui o aggregate a baixo
+    return this.find(filters).populate('author');
+    // return this.aggregate([
+    //     { $match: filters },
+    //     {
+    //         $lookup:
+    //         {
+    //             //join em users
+    //             from: 'users',
+    //             //cria variavel author baseada no campo author da estrutura
+    //             let:{'author':'$author'}, 
+    //             //seria o where basicamente.. bater a expreção author equals _id
+    //             pipeline:[
+    //                 { $match:{ $expr:{ $eq:['$$author','$_id']}}},
+    //                 { $limit:1 }
+    //             ],
+    //             as: 'author'
+    //         },
+    //     },
+    //     {
+    //         $addFields:{
+    //             'author':{ $arrayElemAt:[  '$author.name' , 0 ]}
+    //         }
+    //     }
+    // ])
 
 } 
 

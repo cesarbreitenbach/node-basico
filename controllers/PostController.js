@@ -1,6 +1,7 @@
 const mongoose = require("mongoose")
 const Post = mongoose.model('Post')
 const slug = require('slug');
+const crypto = require('crypto')
 
 
 exports.view = async (req, res) => {
@@ -36,22 +37,29 @@ exports.edit = async (req, res) => {
 
 exports.editAction = async (req, res) => { 
     try {
-        req.body.tags = req.body.tags.split(',').map(t => t.trim())
+        req.body.tags = req.body.tags.split(',').map(t => t.trim());
 
         req.body.slug = slug(req.body.title, { lower: true });
+
+        let hash = crypto.randomBytes(6).toString('hex');
+        let hashSlug = `${req.body.slug}-${hash}`;
+        
+        req.body.slug = hashSlug;
+
+        //procura no mongodb pelo slug
         const post = await Post.findOneAndUpdate(
             { slug: req.params.slug },
             req.body,
             {
                 new: true,
                 runValidators: true 
-            })
+            });
 
     } catch (error) {
         req.flash("error", "Erro: " + error.message);
-        return res.redirect('/post/' + req.params.slug + '/edit')
+        return res.redirect('/post/' + req.params.slug + '/edit');
     }
-    req.flash("success", "Atualizado com sucesso")
-    res.redirect('/')
+    req.flash("success", "Atualizado com sucesso");
+    res.redirect('/');
 
 }
